@@ -5,13 +5,13 @@ LDFLAGS= -nostdlib -T linker.ld
 
 all:main.o vector.o final.elf final.bin
 
-main.o:main.c
+main.o:src/main.c
 	$(CC) $(CFLAGS) -o $@ $^
 
-vector.o:vector.c
+vector.o:src/vector.c
 	$(CC) $(CFLAGS) -o $@ $^
 
-final.elf:main.o startup.o vector.o
+final.elf:main.o vector.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 final.bin:final.elf
@@ -22,3 +22,4 @@ clean:
 
 flash:
 	st-flash write final.bin 0x08000000
+
